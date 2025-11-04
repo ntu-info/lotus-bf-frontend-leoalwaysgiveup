@@ -189,6 +189,7 @@ lotus-bf-frontend/
 ├── DESIGN_SYSTEM.md                # 設計系統文檔
 ├── UI_REFACTOR_GUIDE.md            # UI 重構指南
 ├── index.html
+├── lotus-bf-chat.md                # 聊天檔
 ├── package.json
 ├── vite.config.js                  # Vite 配置
 └── README.md
