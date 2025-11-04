@@ -1,7 +1,9 @@
 import { API_BASE } from '../api'
 import { useEffect, useMemo, useState } from 'react'
+import { SearchInput, Button } from './ui'
+import './Terms.css'
 
-export function Terms ({ onPickTerm }) {
+export function Terms({ onPickTerm }) {
   const [terms, setTerms] = useState([])
   const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(false)
@@ -27,65 +29,69 @@ export function Terms ({ onPickTerm }) {
       }
     }
     load()
-    return () => { alive = false; ac.abort() }
+    return () => {
+      alive = false
+      ac.abort()
+    }
   }, [])
 
   const filtered = useMemo(() => {
     const s = search.trim().toLowerCase()
     if (!s) return terms
-    return terms.filter(t => t.toLowerCase().includes(s))
+    return terms.filter((t) => t.toLowerCase().includes(s))
   }, [terms, search])
 
   return (
-    <div className='terms'>
-      {/* Removed internal <h2> to avoid double "Terms" header. The bold title now comes from App.jsx card__title. */}
-
-      <div className='terms__controls'>
-        <input
+    <div className="terms">
+      <div className="terms__header">
+        <SearchInput
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder='Search terms…'
-          className='input'
+          placeholder="Search terms…"
+          size="md"
         />
-        <button
-          onClick={() => setSearch('')}
-          className='btn btn--primary'
-        >
-          Clear
-        </button>
+        {search && (
+          <Button variant="ghost" size="sm" onClick={() => setSearch('')}>
+            Clear
+          </Button>
+        )}
+      </div>
+
+      <div className="terms__meta">
+        {!loading && filtered.length > 0 && (
+          <span className="terms__count">
+            {filtered.length} {filtered.length === 1 ? 'term' : 'terms'}
+          </span>
+        )}
       </div>
 
       {loading && (
-        <div className='terms__skeleton'>
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className='terms__skeleton-row' />
+        <div className="terms__skeleton">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="terms__skeleton-item" />
           ))}
         </div>
       )}
 
-      {err && (
-        <div className='alert alert--error'>
-          {err}
-        </div>
-      )}
+      {err && <div className="terms__error">{err}</div>}
 
       {!loading && !err && (
-        <div className='terms__list'>
+        <div className="terms__list">
           {filtered.length === 0 ? (
-            <div className='terms__empty'>No terms found</div>
+            <div className="terms__empty">
+              {search ? `No terms matching "${search}"` : 'No terms available'}
+            </div>
           ) : (
-            <ul className='terms__ul'>
+            <ul className="terms__ul">
               {filtered.slice(0, 500).map((t, idx) => (
-                <li key={`${t}-${idx}`} className='terms__li'>
-                  <a
-  href="#"
-  className='terms__name'
-  title={t}
-  aria-label={`Add term ${t}`}
-  onClick={(e) => { e.preventDefault(); onPickTerm?.(t); }}
->
-  {t}
-</a>
+                <li key={`${t}-${idx}`} className="terms__item">
+                  <button
+                    className="terms__button"
+                    title={`Add "${t}" to query`}
+                    onClick={() => onPickTerm?.(t)}
+                  >
+                    {t}
+                  </button>
                 </li>
               ))}
             </ul>
@@ -95,4 +101,3 @@ export function Terms ({ onPickTerm }) {
     </div>
   )
 }
-

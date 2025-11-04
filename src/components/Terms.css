@@ -1,0 +1,150 @@
+/* Terms Component */
+.terms {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+  min-height: 0;
+}
+
+.terms__header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.terms__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+  min-height: 20px;
+}
+
+.terms__count {
+  font-size: 13px;
+  color: #718096;
+  font-weight: 500;
+}
+
+/* List Container */
+.terms__list {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0 -8px;
+  padding: 0 8px;
+}
+
+.terms__ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.terms__item {
+  margin: 0;
+}
+
+/* Term Button */
+.terms__button {
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  color: #4a5568;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 14px;
+  font-family: inherit;
+  line-height: 1.4;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.terms__button:hover {
+  background: rgba(102, 126, 234, 0.08);
+  color: #667eea;
+  transform: translateX(2px);
+}
+
+.terms__button:active {
+  background: rgba(102, 126, 234, 0.15);
+  transform: translateX(0);
+}
+
+/* Loading Skeleton */
+.terms__skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.terms__skeleton-item {
+  height: 40px;
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s ease-in-out infinite;
+  border-radius: 8px;
+  opacity: 0.6;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Error State */
+.terms__error {
+  padding: 12px;
+  background: #fff5f5;
+  border: 1px solid #feb2b2;
+  border-radius: 8px;
+  color: #c53030;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Empty State */
+.terms__empty {
+  padding: 24px 16px;
+  text-align: center;
+  color: #a0aec0;
+  font-size: 14px;
+}
+
+/* Scrollbar Styling */
+.terms__list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.terms__list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.terms__list::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 3px;
+}
+
+.terms__list::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+

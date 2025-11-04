@@ -1,9 +1,9 @@
 import { API_BASE } from '../api'
 import { useEffect, useMemo, useState } from 'react'
+import { Button, SectionTitle } from './ui'
+import './Studies.css'
 
-function classNames (...xs) { return xs.filter(Boolean).join(' ') }
-
-export function Studies ({ query }) {
+export function Studies({ query }) {
   const [rows, setRows] = useState([])
   const [loading, setLoading] = useState(false)
   const [err, setErr] = useState('')
@@ -12,12 +12,18 @@ export function Studies ({ query }) {
   const [page, setPage] = useState(1)
   const pageSize = 20
 
-  useEffect(() => { setPage(1) }, [query])
+  // Reset page when query changes
+  useEffect(() => {
+    setPage(1)
+  }, [query])
 
+  // Fetch studies
   useEffect(() => {
     if (!query) return
+
     let alive = true
     const ac = new AbortController()
+
     ;(async () => {
       setLoading(true)
       setErr('')
@@ -37,12 +43,20 @@ export function Studies ({ query }) {
         if (alive) setLoading(false)
       }
     })()
-    return () => { alive = false; ac.abort() }
+
+    return () => {
+      alive = false
+      ac.abort()
+    }
   }, [query])
 
   const changeSort = (key) => {
-    if (key === sortKey) setSortDir(d => (d === 'asc' ? 'desc' : 'asc'))
-    else { setSortKey(key); setSortDir('asc') }
+    if (key === sortKey) {
+      setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'))
+    } else {
+      setSortKey(key)
+      setSortDir('asc')
+    }
   }
 
   const sorted = useMemo(() => {
@@ -52,7 +66,9 @@ export function Studies ({ query }) {
       const A = a?.[sortKey]
       const B = b?.[sortKey]
       // Numeric comparison for year; string comparison for other fields
-      if (sortKey === 'year') return (Number(A || 0) - Number(B || 0)) * dir
+      if (sortKey === 'year') {
+        return (Number(A || 0) - Number(B || 0)) * dir
+      }
       return String(A || '').localeCompare(String(B || ''), 'en') * dir
     })
     return arr
@@ -61,80 +77,156 @@ export function Studies ({ query }) {
   const totalPages = Math.max(1, Math.ceil(sorted.length / pageSize))
   const pageRows = sorted.slice((page - 1) * pageSize, page * pageSize)
 
-  return (
-    <div className='flex flex-col rounded-2xl border'>
-      <div className='flex items-center justify-between p-3'>
-        <div className='card__title'>Studies</div>
-        <div className='text-sm text-gray-500'>
-           {/* {query ? `Query: ${query}` : 'Query: (empty)'} */}
+  if (!query) {
+    return (
+      <div className="studies studies--empty">
+        <SectionTitle level="h2">Studies</SectionTitle>
+        <div className="studies__placeholder">
+          <svg
+            width="64"
+            height="64"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          >
+            <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+          </svg>
+          <p>Build a query to see related studies</p>
         </div>
       </div>
+    )
+  }
 
+  return (
+    <div className="studies">
+      <div className="studies__header">
+        <SectionTitle
+          level="h2"
+          subtitle={
+            !loading && !err && sorted.length > 0
+              ? `${sorted.length} ${sorted.length === 1 ? 'result' : 'results'} found`
+              : undefined
+          }
+        >
+          Studies
+        </SectionTitle>
+      </div>
 
-      {query && loading && (
-        <div className='grid gap-3 p-3'>
+      {loading && (
+        <div className="studies__skeleton">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className='h-10 animate-pulse rounded-lg bg-gray-100' />
+            <div key={i} className="studies__skeleton-item" />
           ))}
         </div>
       )}
 
-      {query && err && (
-        <div className='mx-3 mb-3 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700'>
-          {err}
-        </div>
-      )}
+      {err && <div className="studies__error">{err}</div>}
 
-      {query && !loading && !err && (
-        <div className='overflow-auto'>
-          <table className='min-w-full text-sm'>
-            <thead className='sticky top-0 bg-gray-50 text-left'>
-              <tr>
-                {[
-                  { key: 'year', label: 'Year' },
-                  { key: 'journal', label: 'Journal' },
-                  { key: 'title', label: 'Title' },
-                  { key: 'authors', label: 'Authors' }
-                ].map(({ key, label }) => (
-                  <th key={key} className='cursor-pointer px-3 py-2 font-semibold' onClick={() => changeSort(key)}>
-                    <span className='inline-flex items-center gap-2'>
-                      {label}
-                      <span className='text-xs text-gray-500'>{sortKey === key ? (sortDir === 'asc' ? '▲' : '▼') : ''}</span>
-                    </span>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {pageRows.length === 0 ? (
-                <tr><td colSpan={4} className='px-3 py-4 text-gray-500'>No data</td></tr>
-              ) : (
-                pageRows.map((r, i) => (
-                  <tr key={i} className={classNames(i % 2 ? 'bg-white' : 'bg-gray-50')}>
-                    <td className='whitespace-nowrap px-3 py-2 align-top'>{r.year ?? ''}</td>
-                    <td className='px-3 py-2 align-top'>{r.journal || ''}</td>
-                    <td className='max-w-[540px] px-3 py-2 align-top'><div className='truncate' title={r.title}>{r.title || ''}</div></td>
-                    <td className='px-3 py-2 align-top'>{r.authors || ''}</td>
+      {!loading && !err && sorted.length > 0 && (
+        <>
+          <div className="studies__table-wrapper">
+            <table className="studies__table">
+              <thead>
+                <tr>
+                  {[
+                    { key: 'year', label: 'Year', width: '80px' },
+                    { key: 'journal', label: 'Journal', width: '200px' },
+                    { key: 'title', label: 'Title', width: 'auto' },
+                    { key: 'authors', label: 'Authors', width: '220px' }
+                  ].map(({ key, label, width }) => (
+                    <th
+                      key={key}
+                      style={{ width }}
+                      onClick={() => changeSort(key)}
+                    >
+                      <div className="studies__th-content">
+                        {label}
+                        <span className="studies__sort-indicator">
+                          {sortKey === key &&
+                            (sortDir === 'asc' ? '↑' : '↓')}
+                        </span>
+                      </div>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {pageRows.map((r, i) => (
+                  <tr key={i}>
+                    <td className="studies__cell studies__cell--year">
+                      {r.year ?? '—'}
+                    </td>
+                    <td className="studies__cell studies__cell--journal">
+                      {r.journal || '—'}
+                    </td>
+                    <td className="studies__cell studies__cell--title">
+                      {r.title || '—'}
+                    </td>
+                    <td className="studies__cell studies__cell--authors">
+                      {r.authors || '—'}
+                    </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {totalPages > 1 && (
+            <div className="studies__pagination">
+              <div className="studies__pagination-info">
+                Page <strong>{page}</strong> of <strong>{totalPages}</strong>
+              </div>
+
+              <div className="studies__pagination-controls">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  disabled={page <= 1}
+                  onClick={() => setPage(1)}
+                  title="First page"
+                >
+                  ⏮
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  disabled={page <= 1}
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                >
+                  Previous
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  disabled={page >= totalPages}
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                >
+                  Next
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  disabled={page >= totalPages}
+                  onClick={() => setPage(totalPages)}
+                  title="Last page"
+                >
+                  ⏭
+                </Button>
+              </div>
+            </div>
+          )}
+        </>
       )}
 
-      {query && !loading && !err && (
-        <div className='flex items-center justify-between border-t p-3 text-sm'>
-          <div>Total <b>{sorted.length}</b> records, page <b>{page}</b>/<b>{totalPages}</b></div>
-          <div className='flex items-center gap-2'>
-            <button disabled={page <= 1} onClick={() => setPage(1)} className='rounded-lg border px-2 py-1 disabled:opacity-40'>⏮</button>
-            <button disabled={page <= 1} onClick={() => setPage(p => Math.max(1, p - 1))} className='rounded-lg border px-2 py-1 disabled:opacity-40'>Previous</button>
-            <button disabled={page >= totalPages} onClick={() => setPage(p => Math.min(totalPages, p + 1))} className='rounded-lg border px-2 py-1 disabled:opacity-40'>Next</button>
-            <button disabled={page >= totalPages} onClick={() => setPage(totalPages)} className='rounded-lg border px-2 py-1 disabled:opacity-40'>⏭</button>
-          </div>
+      {!loading && !err && sorted.length === 0 && (
+        <div className="studies__empty">
+          <p>No studies found for this query.</p>
+          <p className="studies__empty-hint">
+            Try adjusting your search terms or using different operators.
+          </p>
         </div>
       )}
     </div>
   )
 }
-
