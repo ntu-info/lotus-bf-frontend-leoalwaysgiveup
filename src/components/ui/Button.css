@@ -1,0 +1,128 @@
+/* Button Component Styles */
+.ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ui-button:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Sizes */
+.ui-button--sm {
+  font-size: 13px;
+  padding: 8px 16px;
+  min-height: 32px;
+}
+
+.ui-button--md {
+  font-size: 14px;
+  padding: 10px 20px;
+  min-height: 40px;
+}
+
+.ui-button--lg {
+  font-size: 15px;
+  padding: 12px 24px;
+  min-height: 48px;
+}
+
+/* Variants */
+.ui-button--primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 
+    0 2px 4px rgba(102, 126, 234, 0.2),
+    0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.ui-button--primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
+  transform: translateY(-1px);
+  box-shadow: 
+    0 4px 8px rgba(102, 126, 234, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.ui-button--secondary {
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.ui-button--secondary:hover:not(:disabled) {
+  background: rgba(102, 126, 234, 0.05);
+  border-color: #5568d3;
+  transform: translateY(-1px);
+}
+
+.ui-button--ghost {
+  background: transparent;
+  color: #4a5568;
+  border: 1px solid transparent;
+}
+
+.ui-button--ghost:hover:not(:disabled) {
+  background: rgba(102, 126, 234, 0.08);
+  color: #667eea;
+}
+
+.ui-button--danger {
+  background: linear-gradient(135deg, #f56565 0%, #c53030 100%);
+  color: white;
+}
+
+.ui-button--danger:hover:not(:disabled) {
+  background: linear-gradient(135deg, #e53e3e 0%, #9b2c2c 100%);
+  transform: translateY(-1px);
+}
+
+/* States */
+.ui-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.ui-button:disabled,
+.ui-button--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.ui-button--full {
+  width: 100%;
+}
+
+/* 波紋效果 */
+.ui-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.ui-button:active::before {
+  width: 300px;
+  height: 300px;
+  transition: width 0s, height 0s;
+}
+

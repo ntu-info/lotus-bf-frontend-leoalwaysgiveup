@@ -1,0 +1,102 @@
+/* Input Component Styles */
+.ui-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ui-input {
+  font-family: inherit;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 2px solid #e2e8f0;
+  background: white;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.ui-input:hover:not(:disabled):not(:focus) {
+  border-color: #cbd5e0;
+}
+
+.ui-input:focus {
+  border-color: #667eea;
+  box-shadow: 
+    0 0 0 3px rgba(102, 126, 234, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Sizes */
+.ui-input--sm {
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.ui-input--md {
+  padding: 10px 14px;
+  font-size: 14px;
+}
+
+.ui-input--lg {
+  padding: 12px 16px;
+  font-size: 15px;
+}
+
+/* Variants */
+.ui-input--search {
+  padding-left: 40px;
+  background: #f7fafc;
+  border-color: #edf2f7;
+}
+
+.ui-input--search:focus {
+  background: white;
+}
+
+/* States */
+.ui-input--error {
+  border-color: #fc8181;
+}
+
+.ui-input--error:focus {
+  border-color: #f56565;
+  box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.1);
+}
+
+.ui-input--full {
+  width: 100%;
+}
+
+.ui-input:disabled {
+  background: #f7fafc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.ui-input-error {
+  font-size: 13px;
+  color: #e53e3e;
+  margin-top: 4px;
+}
+
+/* Search Input */
+.ui-search-input {
+  position: relative;
+  width: 100%;
+}
+
+.ui-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #a0aec0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ui-search-input .ui-input:focus + .ui-search-icon,
+.ui-search-input:hover .ui-search-icon {
+  color: #667eea;
+}
+

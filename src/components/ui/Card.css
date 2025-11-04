@@ -1,0 +1,81 @@
+/* Card Component Styles */
+.ui-card {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 16px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Variants */
+.ui-card--default {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.ui-card--elevated {
+  background: linear-gradient(145deg, #ffffff 0%, #fafbff 100%);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.06),
+    0 2px 4px -1px rgba(0, 0, 0, 0.04);
+}
+
+.ui-card--bordered {
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.02),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+/* 頂部紫色指示線 */
+.ui-card--elevated::before,
+.ui-card--bordered::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  opacity: 0.8;
+}
+
+/* Padding */
+.ui-card--padding-sm {
+  padding: 16px;
+}
+
+.ui-card--padding-md {
+  padding: 24px;
+}
+
+.ui-card--padding-lg {
+  padding: 32px;
+}
+
+/* Hoverable */
+.ui-card--hoverable {
+  cursor: pointer;
+}
+
+.ui-card--hoverable:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 24px -4px rgba(0, 0, 0, 0.08),
+    0 8px 16px -4px rgba(0, 0, 0, 0.04);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.ui-card--hoverable:hover::before {
+  opacity: 1;
+  height: 4px;
+}
+
+.ui-card--hoverable:active {
+  transform: translateY(0);
+}
+

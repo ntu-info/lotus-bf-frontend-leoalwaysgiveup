@@ -1,0 +1,46 @@
+/* SectionTitle Component Styles */
+.ui-section-title-wrapper {
+  margin-bottom: 20px;
+}
+
+.ui-section-title {
+  font-weight: 700;
+  margin: 0;
+  color: #1a202c;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.ui-section-title--h1 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.ui-section-title--h2 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.ui-section-title--h3 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.ui-section-title--gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 12px;
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, #667eea 0%, #764ba2 100%) 1;
+}
+
+.ui-section-subtitle {
+  font-size: 14px;
+  color: #718096;
+  font-weight: 400;
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
