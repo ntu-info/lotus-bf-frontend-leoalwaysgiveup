@@ -190,30 +190,8 @@ npm run build
 ```
 生產環境自動設定 `base: '/lotus-bf-frontend-leoalwaysgiveup/'`
 
-### 故障排除
 
-**問題：API 請求失敗**
-- 確認 `src/api.js` 中的 API_BASE 設定正確
-- 檢查網路連線
 
-**問題：GitHub Pages 顯示空白頁**
-- 確認 `vite.config.js` 中的 base 路徑設定正確
-- 確認 GitHub Actions 建置成功
-- 清除瀏覽器快取並重新載入
-
-**問題：腦影像無法載入**
-- 確認 `public/static/mni_2mm.nii.gz` 檔案存在
-- 檢查瀏覽器控制台是否有錯誤訊息
-
----
-
-## 🤝 致謝
-
-- **課程教授**：Tren Huang
-- **API 提供**：National Taiwan University - Mind, Intelligence, and Language Lab
-- **腦影像模板**：MNI152 2mm standard brain
-
----
 
 ## 📄 授權
 
@@ -221,13 +199,7 @@ npm run build
 
 ---
 
-## 🔗 相關連結
 
-- [GitHub 倉庫](https://github.com/ntu-info/lotus-bf-frontend-leoalwaysgiveup)
-- [線上展示](https://ntu-info.github.io/lotus-bf-frontend-leoalwaysgiveup/)
-- [NTU COOL 課程](https://cool.ntu.edu.tw/)
-
----
 
 <div align="center">
 
