@@ -59,22 +59,26 @@
 
 /* Coordinates */
 .nii-viewer__coords {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 12px;
+  align-items: center;
 }
 
 .nii-viewer__coord {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex: 1 1 auto;
+  min-width: 100px; /* 確保不會被擠壓 */
 }
 
 .nii-viewer__coord-label {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
-  min-width: 20px;
+  min-width: 24px;
+  flex-shrink: 0; /* 防止標籤被壓縮 */
 }
 
 .nii-viewer__coord-input {
