@@ -22,9 +22,9 @@
 }
 
 .terms__count {
-  font-size: 13px;
-  color: #718096;
-  font-weight: 500;
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  font-weight: var(--font-weight-medium);
 }
 
 /* List Container */
@@ -53,31 +53,47 @@
 .terms__button {
   width: 100%;
   text-align: left;
-  padding: 10px 12px;
+  padding: var(--list-item-padding-y) var(--list-item-padding-x);
   border: none;
   background: transparent;
-  color: #4a5568;
+  color: var(--text-secondary);
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.15s ease;
-  font-size: 14px;
-  font-family: inherit;
-  line-height: 1.4;
+  font-size: var(--font-size-md);
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-relaxed); /* 加大行距方便掃視 */
   position: relative;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: 
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
 }
 
 .terms__button:hover {
-  background: rgba(102, 126, 234, 0.08);
-  color: #667eea;
+  background: rgba(102, 126, 234, 0.06);
+  color: var(--text-link);
   transform: translateX(2px);
 }
 
 .terms__button:active {
-  background: rgba(102, 126, 234, 0.15);
+  background: rgba(102, 126, 234, 0.12);
   transform: translateX(0);
+}
+
+/* Add active/selected state */
+.terms__button.active,
+.terms__button[aria-selected="true"] {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: var(--font-weight-medium);
+}
+
+.terms__button:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
 }
 
 /* Loading Skeleton */

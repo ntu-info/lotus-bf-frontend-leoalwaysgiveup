@@ -78,7 +78,6 @@
 .studies__table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
   min-width: 800px; /* 防止過度壓縮 */
 }
 
@@ -92,18 +91,21 @@
 }
 
 .studies__table th {
-  padding: 14px 16px;
+  padding: var(--table-header-padding-y) var(--table-cell-padding-x);
   text-align: left;
-  font-weight: 600;
-  color: #2d3748;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-wide);
+  color: var(--text-primary);
   border-bottom: 2px solid #cbd5e0;
   cursor: pointer;
   user-select: none;
-  transition: background-color 0.15s ease;
+  transition: var(--transition-colors);
 }
 
 .studies__table th:hover {
-  background: rgba(102, 126, 234, 0.08);
+  background: rgba(102, 126, 234, 0.06);
 }
 
 .studies__th-content {
@@ -124,7 +126,7 @@
 /* Table Body */
 .studies__table tbody tr {
   border-bottom: 1px solid #e2e8f0;
-  transition: background-color 0.15s ease;
+  transition: var(--transition-colors);
 }
 
 .studies__table tbody tr:nth-child(even) {
@@ -133,29 +135,43 @@
 
 .studies__table tbody tr:hover {
   background: rgba(102, 126, 234, 0.05);
+  cursor: pointer;
+}
+
+/* Add interactive state class */
+.studies__table tbody tr.table-row-interactive:hover {
+  background: rgba(102, 126, 234, 0.08) !important;
+}
+
+.studies__table tbody tr.table-row-interactive.selected {
+  background: rgba(102, 126, 234, 0.12) !important;
+  border-left: 3px solid #667eea;
 }
 
 .studies__cell {
-  padding: 14px 16px;
-  color: #4a5568;
-  line-height: 1.6;
+  padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-relaxed); /* 加大行距方便閱讀 */
+  color: var(--text-secondary);
   vertical-align: top;
 }
 
 .studies__cell--year {
-  font-weight: 600;
-  color: #2d3748;
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
   white-space: nowrap;
 }
 
 .studies__cell--journal {
-  color: #718096;
-  font-size: 13px;
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
 }
 
 .studies__cell--title {
-  font-weight: 500;
-  color: #1a202c;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-relaxed); /* 特別放寬論文標題的行距 */
+  color: var(--text-primary);
   /* 允許標題換行 */
   word-wrap: break-word;
   word-break: break-word;
@@ -163,9 +179,9 @@
 }
 
 .studies__cell--authors {
-  color: #718096;
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  color: var(--text-tertiary);
 }
 
 /* Pagination */

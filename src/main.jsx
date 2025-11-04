@@ -2,7 +2,12 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
-import './index.css' 
+
+// Import design system styles in order
+import './index.css'
+import './typography.css'
+import './spacing.css'
+import './interactions.css' 
 
 function ErrorBoundary({ children }) {
   const [err, setErr] = React.useState(null)

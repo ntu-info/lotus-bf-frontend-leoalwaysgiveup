@@ -49,12 +49,12 @@
 }
 
 .nii-viewer__section-title {
-  margin: 0 0 12px 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: #4a5568;
+  margin: 0 0 var(--spacing-3) 0;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: var(--letter-spacing-wider);
 }
 
 /* Coordinates */
@@ -71,31 +71,36 @@
 }
 
 .nii-viewer__coord-label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #2d3748;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
   min-width: 20px;
 }
 
 .nii-viewer__coord-input {
   flex: 1;
-  padding: 8px 10px;
+  padding: var(--input-padding-y) var(--input-padding-x);
   border: 2px solid #e2e8f0;
   border-radius: 8px;
-  font-size: 13px;
-  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family-mono);
   text-align: center;
-  transition: all 0.2s ease;
+  color: var(--text-primary);
+  transition: 
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
 }
 
-.nii-viewer__coord-input:hover {
+.nii-viewer__coord-input:hover:not(:focus) {
   border-color: #cbd5e0;
 }
 
 .nii-viewer__coord-input:focus {
   outline: none;
   border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  box-shadow: 
+    0 0 0 3px rgba(102, 126, 234, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 /* Brain Slices */
@@ -158,9 +163,9 @@
 }
 
 .nii-viewer__control-label {
-  font-size: 13px;
-  font-weight: 500;
-  color: #4a5568;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
   white-space: nowrap;
 }
 

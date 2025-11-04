@@ -1,0 +1,261 @@
+/* ============================================
+   Spacing System for LoTUS-BF
+   Consistent spacing scale for rhythm and breathing room
+   ============================================ */
+
+/* ============================================
+   1. SPACING SCALE
+   Based on 4px base unit
+   ============================================ */
+
+:root {
+  /* Base unit */
+  --spacing-unit: 4px;
+  
+  /* Scale */
+  --spacing-0: 0;
+  --spacing-1: 4px;    /* 0.25rem */
+  --spacing-2: 8px;    /* 0.5rem */
+  --spacing-3: 12px;   /* 0.75rem */
+  --spacing-4: 16px;   /* 1rem */
+  --spacing-5: 20px;   /* 1.25rem */
+  --spacing-6: 24px;   /* 1.5rem */
+  --spacing-7: 28px;   /* 1.75rem */
+  --spacing-8: 32px;   /* 2rem */
+  --spacing-10: 40px;  /* 2.5rem */
+  --spacing-12: 48px;  /* 3rem */
+  --spacing-16: 64px;  /* 4rem */
+  --spacing-20: 80px;  /* 5rem */
+  --spacing-24: 96px;  /* 6rem */
+  
+  /* Semantic spacing */
+  --spacing-xs: var(--spacing-1);   /* 4px */
+  --spacing-sm: var(--spacing-2);   /* 8px */
+  --spacing-md: var(--spacing-4);   /* 16px */
+  --spacing-lg: var(--spacing-6);   /* 24px */
+  --spacing-xl: var(--spacing-8);   /* 32px */
+  --spacing-2xl: var(--spacing-12); /* 48px */
+  --spacing-3xl: var(--spacing-16); /* 64px */
+}
+
+/* ============================================
+   2. COMPONENT SPACING
+   ============================================ */
+
+:root {
+  /* Container */
+  --container-padding-x: var(--spacing-6);
+  --container-padding-y: var(--spacing-5);
+  --container-max-width: 1920px;
+  
+  /* Card / Panel */
+  --card-padding: var(--spacing-6);
+  --card-padding-sm: var(--spacing-4);
+  --card-padding-lg: var(--spacing-8);
+  --card-gap: var(--spacing-4);
+  
+  /* Section */
+  --section-spacing: var(--spacing-8);
+  --section-gap: var(--spacing-6);
+  
+  /* List */
+  --list-item-padding-y: var(--spacing-3);
+  --list-item-padding-x: var(--spacing-3);
+  --list-gap: var(--spacing-1);
+  
+  /* Table */
+  --table-cell-padding-y: var(--spacing-4);
+  --table-cell-padding-x: var(--spacing-4);
+  --table-header-padding-y: var(--spacing-3);
+  --table-row-gap: 0;
+  
+  /* Form */
+  --form-group-gap: var(--spacing-4);
+  --form-label-margin: var(--spacing-2);
+  --input-padding-y: var(--spacing-3);
+  --input-padding-x: var(--spacing-3);
+  
+  /* Button */
+  --button-padding-y-sm: var(--spacing-2);
+  --button-padding-x-sm: var(--spacing-4);
+  --button-padding-y-md: var(--spacing-3);
+  --button-padding-x-md: var(--spacing-5);
+  --button-padding-y-lg: var(--spacing-4);
+  --button-padding-x-lg: var(--spacing-6);
+  --button-gap: var(--spacing-2);
+}
+
+/* ============================================
+   3. LAYOUT SPACING
+   ============================================ */
+
+:root {
+  /* App layout */
+  --app-padding: var(--spacing-5);
+  --app-gap: var(--spacing-5);
+  
+  /* Header */
+  --header-padding-y: var(--spacing-8);
+  --header-padding-x: var(--spacing-10);
+  
+  /* Footer */
+  --footer-padding: var(--spacing-4);
+  
+  /* Grid/Columns */
+  --grid-gap: var(--spacing-4);
+  --column-gap: var(--spacing-0);
+  
+  /* Resizer */
+  --resizer-width: 16px;
+  --resizer-hit-area: 20px;
+}
+
+/* ============================================
+   4. UTILITY CLASSES - MARGIN
+   ============================================ */
+
+/* All sides */
+.m-0 { margin: var(--spacing-0) !important; }
+.m-1 { margin: var(--spacing-1) !important; }
+.m-2 { margin: var(--spacing-2) !important; }
+.m-3 { margin: var(--spacing-3) !important; }
+.m-4 { margin: var(--spacing-4) !important; }
+.m-5 { margin: var(--spacing-5) !important; }
+.m-6 { margin: var(--spacing-6) !important; }
+.m-8 { margin: var(--spacing-8) !important; }
+
+/* Top */
+.mt-0 { margin-top: var(--spacing-0) !important; }
+.mt-1 { margin-top: var(--spacing-1) !important; }
+.mt-2 { margin-top: var(--spacing-2) !important; }
+.mt-3 { margin-top: var(--spacing-3) !important; }
+.mt-4 { margin-top: var(--spacing-4) !important; }
+.mt-5 { margin-top: var(--spacing-5) !important; }
+.mt-6 { margin-top: var(--spacing-6) !important; }
+.mt-8 { margin-top: var(--spacing-8) !important; }
+
+/* Bottom */
+.mb-0 { margin-bottom: var(--spacing-0) !important; }
+.mb-1 { margin-bottom: var(--spacing-1) !important; }
+.mb-2 { margin-bottom: var(--spacing-2) !important; }
+.mb-3 { margin-bottom: var(--spacing-3) !important; }
+.mb-4 { margin-bottom: var(--spacing-4) !important; }
+.mb-5 { margin-bottom: var(--spacing-5) !important; }
+.mb-6 { margin-bottom: var(--spacing-6) !important; }
+.mb-8 { margin-bottom: var(--spacing-8) !important; }
+
+/* Left */
+.ml-0 { margin-left: var(--spacing-0) !important; }
+.ml-1 { margin-left: var(--spacing-1) !important; }
+.ml-2 { margin-left: var(--spacing-2) !important; }
+.ml-3 { margin-left: var(--spacing-3) !important; }
+.ml-4 { margin-left: var(--spacing-4) !important; }
+
+/* Right */
+.mr-0 { margin-right: var(--spacing-0) !important; }
+.mr-1 { margin-right: var(--spacing-1) !important; }
+.mr-2 { margin-right: var(--spacing-2) !important; }
+.mr-3 { margin-right: var(--spacing-3) !important; }
+.mr-4 { margin-right: var(--spacing-4) !important; }
+
+/* Horizontal (X-axis) */
+.mx-0 { margin-left: var(--spacing-0) !important; margin-right: var(--spacing-0) !important; }
+.mx-auto { margin-left: auto !important; margin-right: auto !important; }
+
+/* Vertical (Y-axis) */
+.my-0 { margin-top: var(--spacing-0) !important; margin-bottom: var(--spacing-0) !important; }
+.my-2 { margin-top: var(--spacing-2) !important; margin-bottom: var(--spacing-2) !important; }
+.my-4 { margin-top: var(--spacing-4) !important; margin-bottom: var(--spacing-4) !important; }
+
+/* ============================================
+   5. UTILITY CLASSES - PADDING
+   ============================================ */
+
+/* All sides */
+.p-0 { padding: var(--spacing-0) !important; }
+.p-1 { padding: var(--spacing-1) !important; }
+.p-2 { padding: var(--spacing-2) !important; }
+.p-3 { padding: var(--spacing-3) !important; }
+.p-4 { padding: var(--spacing-4) !important; }
+.p-5 { padding: var(--spacing-5) !important; }
+.p-6 { padding: var(--spacing-6) !important; }
+.p-8 { padding: var(--spacing-8) !important; }
+
+/* Top */
+.pt-0 { padding-top: var(--spacing-0) !important; }
+.pt-2 { padding-top: var(--spacing-2) !important; }
+.pt-3 { padding-top: var(--spacing-3) !important; }
+.pt-4 { padding-top: var(--spacing-4) !important; }
+.pt-6 { padding-top: var(--spacing-6) !important; }
+
+/* Bottom */
+.pb-0 { padding-bottom: var(--spacing-0) !important; }
+.pb-2 { padding-bottom: var(--spacing-2) !important; }
+.pb-3 { padding-bottom: var(--spacing-3) !important; }
+.pb-4 { padding-bottom: var(--spacing-4) !important; }
+.pb-6 { padding-bottom: var(--spacing-6) !important; }
+
+/* Left */
+.pl-2 { padding-left: var(--spacing-2) !important; }
+.pl-3 { padding-left: var(--spacing-3) !important; }
+.pl-4 { padding-left: var(--spacing-4) !important; }
+
+/* Right */
+.pr-2 { padding-right: var(--spacing-2) !important; }
+.pr-3 { padding-right: var(--spacing-3) !important; }
+.pr-4 { padding-right: var(--spacing-4) !important; }
+
+/* Horizontal (X-axis) */
+.px-0 { padding-left: var(--spacing-0) !important; padding-right: var(--spacing-0) !important; }
+.px-2 { padding-left: var(--spacing-2) !important; padding-right: var(--spacing-2) !important; }
+.px-3 { padding-left: var(--spacing-3) !important; padding-right: var(--spacing-3) !important; }
+.px-4 { padding-left: var(--spacing-4) !important; padding-right: var(--spacing-4) !important; }
+.px-6 { padding-left: var(--spacing-6) !important; padding-right: var(--spacing-6) !important; }
+
+/* Vertical (Y-axis) */
+.py-0 { padding-top: var(--spacing-0) !important; padding-bottom: var(--spacing-0) !important; }
+.py-2 { padding-top: var(--spacing-2) !important; padding-bottom: var(--spacing-2) !important; }
+.py-3 { padding-top: var(--spacing-3) !important; padding-bottom: var(--spacing-3) !important; }
+.py-4 { padding-top: var(--spacing-4) !important; padding-bottom: var(--spacing-4) !important; }
+.py-6 { padding-top: var(--spacing-6) !important; padding-bottom: var(--spacing-6) !important; }
+
+/* ============================================
+   6. GAP UTILITIES (for Flexbox/Grid)
+   ============================================ */
+
+.gap-0 { gap: var(--spacing-0) !important; }
+.gap-1 { gap: var(--spacing-1) !important; }
+.gap-2 { gap: var(--spacing-2) !important; }
+.gap-3 { gap: var(--spacing-3) !important; }
+.gap-4 { gap: var(--spacing-4) !important; }
+.gap-5 { gap: var(--spacing-5) !important; }
+.gap-6 { gap: var(--spacing-6) !important; }
+.gap-8 { gap: var(--spacing-8) !important; }
+
+/* ============================================
+   7. RESPONSIVE SPACING
+   ============================================ */
+
+@media (max-width: 1024px) {
+  :root {
+    --app-padding: var(--spacing-4);
+    --app-gap: var(--spacing-4);
+    --header-padding-y: var(--spacing-6);
+    --header-padding-x: var(--spacing-6);
+    --card-padding: var(--spacing-5);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --app-padding: var(--spacing-3);
+    --app-gap: var(--spacing-3);
+    --header-padding-y: var(--spacing-4);
+    --header-padding-x: var(--spacing-4);
+    --card-padding: var(--spacing-4);
+    --section-spacing: var(--spacing-6);
+    --table-cell-padding-y: var(--spacing-3);
+    --table-cell-padding-x: var(--spacing-3);
+  }
+}
+

@@ -1,0 +1,511 @@
+/* ============================================
+   Interaction & Animation System for LoTUS-BF
+   Smooth, purposeful feedback without being flashy
+   ============================================ */
+
+/* ============================================
+   1. TRANSITION SYSTEM
+   ============================================ */
+
+:root {
+  /* Timing functions */
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Durations */
+  --duration-instant: 0ms;
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+  
+  /* Standard transitions */
+  --transition-colors: color var(--duration-fast) var(--ease-out),
+                       background-color var(--duration-fast) var(--ease-out),
+                       border-color var(--duration-fast) var(--ease-out);
+  --transition-transform: transform var(--duration-base) var(--ease-out);
+  --transition-opacity: opacity var(--duration-base) var(--ease-out);
+  --transition-all: all var(--duration-base) var(--ease-in-out);
+  --transition-shadow: box-shadow var(--duration-base) var(--ease-out);
+}
+
+/* ============================================
+   2. INTERACTIVE STATES
+   ============================================ */
+
+/* Base interactive element */
+.interactive {
+  cursor: pointer;
+  user-select: none;
+  transition: var(--transition-colors), var(--transition-shadow);
+}
+
+.interactive:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ============================================
+   3. BUTTON STATES
+   ============================================ */
+
+/* Primary button interactions */
+.btn-interactive {
+  position: relative;
+  overflow: hidden;
+  transition: 
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    var(--transition-colors);
+}
+
+.btn-interactive:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.12),
+    0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.btn-interactive:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.08);
+  transition-duration: var(--duration-instant);
+}
+
+/* Ripple effect (optional, can be added via JS) */
+.btn-interactive::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width var(--duration-slower) var(--ease-out),
+              height var(--duration-slower) var(--ease-out);
+}
+
+.btn-interactive:active::after {
+  width: 300px;
+  height: 300px;
+  transition-duration: var(--duration-instant);
+}
+
+/* ============================================
+   4. LIST ITEM STATES
+   ============================================ */
+
+.list-item-interactive {
+  transition: 
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.list-item-interactive:hover {
+  background: rgba(102, 126, 234, 0.06);
+  color: #667eea;
+  transform: translateX(2px);
+}
+
+.list-item-interactive:active {
+  background: rgba(102, 126, 234, 0.12);
+  transform: translateX(0);
+}
+
+.list-item-interactive.active,
+.list-item-interactive[aria-selected="true"] {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 500;
+}
+
+.list-item-interactive.active:hover {
+  background: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
+  transform: translateX(0);
+}
+
+/* ============================================
+   5. TABLE ROW STATES
+   ============================================ */
+
+.table-row-interactive {
+  transition: background-color var(--duration-fast) var(--ease-out);
+  cursor: pointer;
+}
+
+.table-row-interactive:hover {
+  background: rgba(102, 126, 234, 0.05) !important;
+}
+
+.table-row-interactive:active {
+  background: rgba(102, 126, 234, 0.08) !important;
+}
+
+.table-row-interactive.selected,
+.table-row-interactive[aria-selected="true"] {
+  background: rgba(102, 126, 234, 0.1) !important;
+  border-left: 3px solid #667eea;
+}
+
+/* ============================================
+   6. INPUT STATES
+   ============================================ */
+
+.input-interactive {
+  transition: 
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.input-interactive:hover:not(:disabled):not(:focus) {
+  border-color: #cbd5e0;
+}
+
+.input-interactive:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 
+    0 0 0 3px rgba(102, 126, 234, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.input-interactive.error,
+.input-interactive[aria-invalid="true"] {
+  border-color: #fc8181;
+}
+
+.input-interactive.error:focus,
+.input-interactive[aria-invalid="true"]:focus {
+  border-color: #f56565;
+  box-shadow: 
+    0 0 0 3px rgba(245, 101, 101, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* ============================================
+   7. CARD/PANEL STATES
+   ============================================ */
+
+.card-interactive {
+  transition: 
+    transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out);
+}
+
+.card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 24px -4px rgba(0, 0, 0, 0.08),
+    0 8px 16px -4px rgba(0, 0, 0, 0.04);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.card-interactive:active {
+  transform: translateY(0);
+}
+
+/* ============================================
+   8. LOADING STATES
+   ============================================ */
+
+/* Skeleton loading animation */
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 8px;
+  opacity: 0.6;
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loading-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* Fade in animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fade-in var(--duration-base) var(--ease-out);
+}
+
+/* Slide in animation */
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in {
+  animation: slide-in var(--duration-base) var(--ease-out);
+}
+
+/* ============================================
+   9. EMPTY & ERROR STATES
+   ============================================ */
+
+.empty-state {
+  padding: var(--spacing-12) var(--spacing-6);
+  text-align: center;
+  color: #a0aec0;
+  animation: fade-in var(--duration-slow) var(--ease-out);
+}
+
+.empty-state-icon {
+  opacity: 0.5;
+  margin-bottom: var(--spacing-4);
+}
+
+.empty-state-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: #718096;
+  margin-bottom: var(--spacing-2);
+}
+
+.empty-state-description {
+  font-size: var(--font-size-sm);
+  color: #a0aec0;
+}
+
+/* Error state */
+.error-state {
+  padding: var(--spacing-4);
+  background: #fff5f5;
+  border: 1px solid #feb2b2;
+  border-radius: 10px;
+  color: #c53030;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  animation: slide-in var(--duration-base) var(--ease-out);
+}
+
+.error-state-icon {
+  color: #f56565;
+  margin-right: var(--spacing-2);
+}
+
+/* ============================================
+   10. FOCUS VISIBLE STATES
+   ============================================ */
+
+/* Only show focus ring for keyboard navigation */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Button focus */
+button:focus-visible,
+.btn:focus-visible {
+  outline-offset: 4px;
+}
+
+/* Input focus */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 
+    0 0 0 3px rgba(102, 126, 234, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* ============================================
+   11. KEYBOARD NAVIGATION
+   ============================================ */
+
+/* Highlight keyboard-navigated items */
+.keyboard-navigation *:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Disable mouse outline if JS adds this class */
+.mouse-navigation *:focus {
+  outline: none;
+}
+
+/* ============================================
+   12. DRAG & DROP STATES (future enhancement)
+   ============================================ */
+
+.draggable {
+  cursor: move;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.dragging {
+  opacity: 0.5;
+}
+
+.drop-zone {
+  border: 2px dashed #cbd5e0;
+  transition: 
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.drop-zone-active {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.05);
+}
+
+/* ============================================
+   13. TOOLTIP STATES
+   ============================================ */
+
+.tooltip-trigger {
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  background: #1a202c;
+  color: white;
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: 6px;
+  font-size: var(--font-size-xs);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: 
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+  z-index: 1000;
+}
+
+.tooltip-trigger:hover .tooltip,
+.tooltip-trigger:focus .tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   14. SELECTION STATES
+   ============================================ */
+
+/* Text selection */
+::selection {
+  background: rgba(102, 126, 234, 0.3);
+  color: inherit;
+}
+
+::-moz-selection {
+  background: rgba(102, 126, 234, 0.3);
+  color: inherit;
+}
+
+/* ============================================
+   15. ACCESSIBILITY STATES
+   ============================================ */
+
+/* Reduced motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode adjustments */
+@media (prefers-contrast: high) {
+  .btn-interactive:hover {
+    border: 2px solid currentColor;
+  }
+  
+  .list-item-interactive:hover {
+    outline: 2px solid currentColor;
+  }
+}
+
+/* ============================================
+   16. PRINT STATES
+   ============================================ */
+
+@media print {
+  .interactive,
+  .btn-interactive,
+  .list-item-interactive,
+  .table-row-interactive {
+    transition: none !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  .skeleton,
+  .loading-pulse,
+  .loading-spinner {
+    animation: none !important;
+  }
+}
+

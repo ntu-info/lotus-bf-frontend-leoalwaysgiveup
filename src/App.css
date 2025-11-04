@@ -74,14 +74,9 @@ body,
   overflow: hidden;
 }
 
+/* Body styles are now inherited from typography.css */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-    'Helvetica Neue', Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   background: var(--color-bg-gradient);
-  color: var(--color-text-primary);
-  line-height: 1.6;
 }
 
 /* App Container */
@@ -89,9 +84,11 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  padding: 20px;
-  gap: 20px;
-  animation: fadeIn 0.5s ease;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: var(--app-padding);
+  gap: var(--app-gap);
+  animation: fadeIn var(--duration-slow) var(--ease-out);
 }
 
 @keyframes fadeIn {
@@ -110,13 +107,15 @@ body {
   flex-shrink: 0;
   background: var(--gradient-primary);
   border-radius: var(--radius-2xl);
-  padding: 32px 40px;
+  padding: var(--header-padding-y) var(--header-padding-x);
   box-shadow: 
     0 8px 32px rgba(102, 126, 234, 0.4),
     0 2px 8px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
-  transition: all var(--transition-base);
+  transition: 
+    transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
 }
 
 .app__header::before {
@@ -158,23 +157,21 @@ body {
 
 .app__title {
   margin: 0;
-  font-size: 36px;
-  font-weight: 800;
-  letter-spacing: -1.5px;
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tighter);
   color: white;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(to right, #ffffff, #f0f0ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: white;
 }
 
 .app__subtitle {
-  margin-top: 8px;
-  font-size: 16px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.95);
-  letter-spacing: 0.5px;
+  margin-top: var(--spacing-2);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  color: var(--text-on-primary-muted);
+  letter-spacing: var(--letter-spacing-wide);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
@@ -190,7 +187,7 @@ body {
 .app__panel {
   min-width: 0;
   overflow: auto;
-  animation: slideIn 0.4s ease;
+  animation: slideIn var(--duration-slow) var(--ease-out);
 }
 
 @keyframes slideIn {
@@ -274,10 +271,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 16px;
-  font-size: 13px;
-  color: var(--color-text-muted);
+  gap: var(--spacing-3);
+  padding: var(--footer-padding);
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
   border-top: 1px solid var(--color-border);
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
@@ -285,8 +282,8 @@ body {
 }
 
 .app__footer span:first-child {
-  font-weight: 600;
-  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
 }
 
 /* Responsive Design */
